@@ -7,10 +7,17 @@ class ServerService {
   Handler get handler {
     final router = Router();
 
+    // ----------- MIME TYPES ----------//
+    /* 
+      text/plain = Texto
+      text/html = Html
+     */
     // ------------ GET ---------------//
 
     router.get('/', (Request request) {
-      return Response(200, body: 'Primeira rota');
+      return Response(200,
+          body: '<h1> Primeira rota </h1>',
+          headers: {'content-type': 'text/html'});
     });
 
     // http://localhost:8080/ola/mundo/Lerry
@@ -31,7 +38,7 @@ class ServerService {
     // ------------ POST ---------------//
 
     // BODY
-     /* {
+    /* {
       "user": "admin",
       "password": "123"
      } */
@@ -45,7 +52,10 @@ class ServerService {
 
       if (user == 'admin' && password == '123') {
         // Se usuário == admin e senha == 123
-        return Response.ok('Bem vindo $user');
+        Map result = {'token': 'token123', 'user_id': 1};
+        var jsonResponse = jsonEncode(result);
+        return Response.ok(jsonResponse,
+            headers: {'content-type': 'application/json'});
       } else {
         // Se não
         return Response.forbidden('Acesso negado');

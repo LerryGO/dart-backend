@@ -19,3 +19,16 @@ Baseado no curso pelo youtube do Prof. Deivid Willyan
 ## 🚀 Sobre mim
 Sou desenvolvedor Front-end Flutter, aprendendo back-end Dart/Shelf
 
+
+## Aprendizados
+
+O conteúdo desse curso ensina: 
+* Introdução Backend
+* Protocolo HTTP e Padrão REST
+* Criando o servidor HTTP
+* Criando a primeira API
+* Passagem de dados com Query Param e Router Param
+* Trabalhando com Jsons e Post Method
+* Mime Type, Trabalhando com retornos correto
+* Iniciando o projeto e conhecendo Cascade e Pipeline
+* Removendo Informações sensíveis com env file

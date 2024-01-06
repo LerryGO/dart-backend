@@ -18,6 +18,7 @@ void main() async {
 
   var handler = Pipeline()
       .addMiddleware(logRequests())
+      .addMiddleware(SecurityServiceImp().authorization)
       .addMiddleware((MiddlewareInterception().middleware))
       .addHandler(cascadeHandler);
 

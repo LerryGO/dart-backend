@@ -1,0 +1,43 @@
+// CONTAINER DE INJEÇÃO DE DEPENDENCIA
+
+typedef InstanceCreator<T> = T Function();
+
+class DependencyInjector {
+  DependencyInjector._();
+  static final _singleton = DependencyInjector._();
+  factory DependencyInjector() => _singleton;
+
+  final _instanceMap = <Type, _InstanceGenerator<Object>>{};
+
+  // REGISTER
+  void register<T extends Object>(
+    InstanceCreator<T> instance, {
+    bool isSingleton = false,
+  }) =>
+      _instanceMap[T] = _InstanceGenerator(instance, isSingleton);
+
+  // GET
+  T get<T extends Object>() {
+    final instance = _instanceMap[T]?.getInstance();
+    if (instance != null && instance is T) return instance;
+    throw Exception('[ERROR] -> Instance ${T.toString()} not found');
+  }
+}
+
+class _InstanceGenerator<T> {
+  T? _instance;
+  bool _inFirstGet = false;
+
+  final InstanceCreator<T> _instanceCreator;
+
+  _InstanceGenerator(this._instanceCreator, bool isSingleton)
+      : _inFirstGet = isSingleton;
+
+  T? getInstance() {
+    if (_inFirstGet) {
+      _instance = _instanceCreator();
+      _inFirstGet = false;
+    }
+    return _instance ?? _instanceCreator();
+  }
+}

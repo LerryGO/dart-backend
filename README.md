@@ -32,3 +32,19 @@ O conteúdo desse curso ensina:
 * Mime Type, Trabalhando com retornos correto
 * Iniciando o projeto e conhecendo Cascade e Pipeline
 * Removendo Informações sensíveis com env file
+* Criando APIs RESTful
+* Model Layer
+* Service Layer aplicando DIP do SOLID
+* Isolando as camadas de SERVICE e API
+* Custom Middleware
+* Introdução ao JWT
+* Implantando JWT
+* Middlewares Customizados por API
+* Criando Injetor de Dependências do Zero
+* Encapsulando a Segurança por Handler
+* Organizando as Injeções de Dependências e Responsabilidades
+* Introdução ao Banco de Dados (NoSQL x SQL)
+* Introdução ao Docker, Docker Compose e MySQL
+* Iniciando o Banco de Dados no Docker
+* Introdução ao SQL
+* Principais Comandos SQL

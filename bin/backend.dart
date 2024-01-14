@@ -4,27 +4,23 @@ import 'package:shelf/shelf.dart';
 import 'apis/blog_api.dart';
 import 'apis/login_api.dart';
 import 'infra/custom_server.dart';
+import 'infra/database/db_configuration.dart';
 import 'infra/dependency_injector/injects.dart';
 import 'infra/middleware_interception.dart';
+import 'models/usuario_model.dart';
 import 'utils/custom_env.dart';
 
 void main() async {
   CustomEnv.fromFile('.env-dev');
 
-  var connection = await MySqlConnection.connect(
-    ConnectionSettings(
-      host: await CustomEnv.get<String>(key: 'db_host'),
-      port: await CustomEnv.get<int>(key: 'db_port'),
-      user:await CustomEnv.get<String>(key: 'db_user') ,
-      password: await CustomEnv.get<String>(key: 'db_pass'),
-      db: await CustomEnv.get<String>(key: 'db_schema'),
-    ),
-  );
-
-  var result = await connection.query('SELECT * FROM users');
-  print(result);
-  
   final di = Injects.initialize();
+
+  var conexao = await di<DBConfiguration>().connection;
+  var result = await conexao.query('SELECT * FROM users;');
+  for (ResultRow r in result) {
+    UsuarioModel usuario = UsuarioModel.fromMap(r.fields);
+    print(usuario.toString());
+  }
 
   var cascadeHandler = Cascade()
       .add(di.get<LoginApi>().getHandler())

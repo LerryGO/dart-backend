@@ -50,3 +50,7 @@ INNER JOIN users u on u.id = n.user_id
 ORDER BY n.updated_at DESC;
 
 SELECT * FROM news LIMIT 2;
+
+SELECT * FROM users;
+
+UPDATE users SET is_active = 0 WHERE id = 2;

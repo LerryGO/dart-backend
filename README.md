@@ -48,3 +48,4 @@ O conteúdo desse curso ensina:
 * Iniciando o Banco de Dados no Docker
 * Introdução ao SQL
 * Principais Comandos SQL
+* Conectando o Projeto Dart ao MySQL

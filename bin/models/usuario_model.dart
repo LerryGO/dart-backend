@@ -33,4 +33,11 @@ class UsuarioModel {
       dtUpdated: map['updated_at'],
     );
   }
+
+  factory UsuarioModel.fromRequest(Map map) {
+    return UsuarioModel()
+      ..name = map['name']
+      ..email = map['email']
+      ..password = map['password'];
+  }
 }

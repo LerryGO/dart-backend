@@ -28,4 +28,6 @@ class UsuarioService implements GenericService<UsuarioModel> {
       return _usuarioDAO.create(value);
     }
   }
+
+  Future<UsuarioModel?> findByEmail(String email) async => _usuarioDAO.findByEmail(email);
 }

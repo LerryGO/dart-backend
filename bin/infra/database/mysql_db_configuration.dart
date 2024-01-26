@@ -7,9 +7,11 @@ class MySqlDBConfiguration implements DBConfiguration {
   MySqlConnection? _connection;
 
   @override
-  Future<MySqlConnection> get connection async{
+  Future<MySqlConnection> get connection async {
     _connection ??= await createConnection();
-    if(_connection == null) throw Exception('[ERROR/DB] -> Failed to Create Connection ');
+    if (_connection == null) {
+      throw Exception('[ERROR/DB] -> Failed to Create Connection ');
+    }
     return _connection!;
   }
 
@@ -24,5 +26,11 @@ class MySqlDBConfiguration implements DBConfiguration {
         db: await CustomEnv.get<String>(key: 'db_schema'),
       ),
     );
+  }
+
+  @override
+  execQuery(String sql, [List? params]) async {
+    var conn = await connection;
+    return await conn.query(sql, params);
   }
 }

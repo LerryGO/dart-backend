@@ -1,45 +1,38 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class NoticiaModel {
-  final int? id;
-  final String title;
-  final String description;
-  final String image;
-  final DateTime createdAt;
-  final DateTime? updatedAt;
+  int? id;
+  String? title;
+  String? description;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? userId;
 
-  NoticiaModel({
-    this.id,
-    required this.title,
-    required this.description,
-    required this.image,
-    required this.createdAt,
-    this.updatedAt,
-  });
+  NoticiaModel();
 
-  @override
-  String toString() {
-    return 'NoticiaModel(id: $id, title: $title, description: $description, image: $image, createdAt: $createdAt, updatedAt: $updatedAt)';
+  factory NoticiaModel.fromMap(Map map) {
+    return NoticiaModel()
+      ..id = map['id']?.toInt()
+      ..title = map['title']
+      ..description = map['description'].toString()
+      ..createdAt = map['created_at']
+      ..updatedAt = map['updated_at']
+      ..userId = map['user_id']?.toInt();
   }
 
-  factory NoticiaModel.fromJson(Map map) {
-    return NoticiaModel(
-      id: map['id'] ?? '',
-      title: map['title'],
-      description: map['description'],
-      image: map['image'],
-      createdAt: DateTime.fromMicrosecondsSinceEpoch(map['createdAt']),
-      updatedAt: map['updatedAt'] != null
-          ? DateTime.fromMicrosecondsSinceEpoch(map['updatedAt'])
-          : null,
-    );
+  factory NoticiaModel.fromRequest(Map map) {
+    return NoticiaModel()..title = map['title']..description = map['description']..userId = map['userId']?.toInt();
   }
 
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
+  Map toJson() {
+    return {
       'id': id,
       'title': title,
       'description': description,
-      'image': image,
-      'createdAt': createdAt.millisecondsSinceEpoch,
     };
+  }
+
+  @override
+  String toString() {
+    return 'NoticiaModel(id: $id, title: $title, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, userId: $userId)';
   }
 }
